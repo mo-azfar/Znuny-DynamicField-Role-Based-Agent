@@ -1,2 +1,2 @@
 # Znuny DynamicField Roled Based Agent
- Populate dynamic field with agent within selected role (dropdown)
+- Populate list of agent in dynamic field based on selected role (dropdown).
