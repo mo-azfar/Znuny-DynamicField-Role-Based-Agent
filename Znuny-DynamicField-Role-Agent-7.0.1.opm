@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.1">
-    <Name>DynamicField-Role-Agent</Name>
+    <Name>Znuny-DynamicField-Role-Agent</Name>
     <Version>7.0.1</Version>
     <Vendor>mo-azfar</Vendor>
-    <URL>https://github.com/mo-azfar/OTRS-Znuny-Read-Only-DynamicField-Text</URL>
+    <URL>https://github.com/mo-azfar/Znuny-DynamicField-Role-Based-Agent</URL>
     <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
     <ChangeLog Date="2023-05-18 00:00:01" Version="1.0.1">New package.</ChangeLog>
     <Description Lang="en">Populate list of agent in dynamic field based on selected role (dropdown).</Description>
@@ -13,13 +13,13 @@
         &lt;b&gt;WELCOME&lt;/b&gt;
         &lt;br&gt;
         &lt;br&gt;
-        You are about to install the package DynamicField-Role-Agent.Check &lt;a href='https://github.com/mo-azfar/Znuny-DynamicField-Roled-Based-Agent' target='_blank'&gt;README&lt;/a&gt;&lt;br&gt;
+        You are about to install the package DynamicField-Role-Agent.Check &lt;a href='https://github.com/mo-azfar/Znuny-DynamicField-Role-Based-Agent' target='_blank'&gt;README&lt;/a&gt;&lt;br&gt;
         &lt;br&gt;
         &lt;br&gt;
         ((enjoy))&lt;br&gt;
         &lt;br&gt;
     </IntroInstall>
-    <BuildDate>2023-05-19 10:14:58</BuildDate>
+    <BuildDate>2023-05-19 19:00:15</BuildDate>
     <BuildHost>app.myserver.com</BuildHost>
     <Filelist>
         <File Location="Kernel/Config/Files/XML/ZZZDynamicFieldRoleAgent.xml" Permission="660" Encode="Base64">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPG90cnNfY29uZmlnIHZlcnNpb249IjIuMCIgaW5pdD0iQ29uZmlnIj4KICAgICAgICA8U2V0dGluZyBOYW1lPSJGcm9udGVuZDo6TW9kdWxlIyMjQWRtaW5EeW5hbWljRmllbGRSb2xlQWdlbnQiIFJlcXVpcmVkPSIwIiBWYWxpZD0iMSI+CiAgICAgICAgPERlc2NyaXB0aW9uIFRyYW5zbGF0YWJsZT0iMSI+RnJvbnRlbmQgbW9kdWxlIHJlZ2lzdHJhdGlvbiBmb3IgdGhlIGFnZW50IGludGVyZmFjZS48L0Rlc2NyaXB0aW9uPgogICAgICAgIDxOYXZpZ2F0aW9uPkZyb250ZW5kOjpBZG1pbjo6TW9kdWxlUmVnaXN0cmF0aW9uPC9OYXZpZ2F0aW9uPgogICAgICAgIDxWYWx1ZT4KICAgICAgICAgICAgPEl0ZW0gVmFsdWVUeXBlPSJGcm9udGVuZFJlZ2lzdHJhdGlvbiI+CiAgICAgICAgICAgICAgICA8SGFzaD4KICAgICAgICAgICAgICAgICAgICA8SXRlbSBLZXk9Ikdyb3VwUm8iPgogICAgICAgICAgICAgICAgICAgICAgICA8QXJyYXk+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvQXJyYXk+CiAgICAgICAgICAgICAgICAgICAgPC9JdGVtPgogICAgICAgICAgICAgICAgICAgIDxJdGVtIEtleT0iR3JvdXAiPgogICAgICAgICAgICAgICAgICAgICAgICA8QXJyYXk+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8SXRlbT5hZG1pbjwvSXRlbT4KICAgICAgICAgICAgICAgICAgICAgICAgPC9BcnJheT4KICAgICAgICAgICAgICAgICAgICA8L0l0ZW0+CiAgICAgICAgICAgICAgICAgICAgPEl0ZW0gS2V5PSJEZXNjcmlwdGlvbiIgVHJhbnNsYXRhYmxlPSIxIj5UaGlzIG1vZHVsZSBpcyBwYXJ0IG9mIHRoZSBhZG1pbiBhcmVhIG9mIE9UUlMuPC9JdGVtPgogICAgICAgICAgICAgICAgICAgIDxJdGVtIEtleT0iVGl0bGUiIFRyYW5zbGF0YWJsZT0iMSI+RHluYW1pYyBGaWVsZHMgRHJvcC1kb3duIEJhY2tlbmQgR1VJPC9JdGVtPgogICAgICAgICAgICAgICAgICAgIDxJdGVtIEtleT0iTmF2QmFyTmFtZSI+PC9JdGVtPgogICAgICAgICAgICAgICAgPC9IYXNoPgogICAgICAgICAgICA8L0l0ZW0+CiAgICAgICAgPC9WYWx1ZT4KICAgIDwvU2V0dGluZz4KCTxTZXR0aW5nIE5hbWU9IkxvYWRlcjo6TW9kdWxlOjpBZG1pbkR5bmFtaWNGaWVsZFJvbGVBZ2VudCMjIzAwMi1UaWNrZXQiIFJlcXVpcmVkPSIwIiBWYWxpZD0iMSI+CiAgICAgICAgPERlc2NyaXB0aW9uIFRyYW5zbGF0YWJsZT0iMSI+TG9hZGVyIG1vZHVsZSByZWdpc3RyYXRpb24gZm9yIHRoZSBhZ2VudCBpbnRlcmZhY2UuPC9EZXNjcmlwdGlvbj4KICAgICAgICA8TmF2aWdhdGlvbj5Gcm9udGVuZDo6QWRtaW46Ok1vZHVsZVJlZ2lzdHJhdGlvbjo6TG9hZGVyPC9OYXZpZ2F0aW9uPgogICAgICAgIDxWYWx1ZT4KICAgICAgICAgICAgPEhhc2g+CiAgICAgICAgICAgICAgICA8SXRlbSBLZXk9IkNTUyI+CiAgICAgICAgICAgICAgICAgICAgPEFycmF5PgogICAgICAgICAgICAgICAgICAgICAgICA8SXRlbT5Db3JlLkFnZW50LkFkbWluLkR5bmFtaWNGaWVsZC5jc3M8L0l0ZW0+CiAgICAgICAgICAgICAgICAgICAgPC9BcnJheT4KICAgICAgICAgICAgICAgIDwvSXRlbT4KICAgICAgICAgICAgICAgIDxJdGVtIEtleT0iSmF2YVNjcmlwdCI+CiAgICAgICAgICAgICAgICAgICAgPEFycmF5PgogICAgICAgICAgICAgICAgICAgICAgICA8SXRlbT5Db3JlLkFnZW50LkFkbWluLkR5bmFtaWNGaWVsZC5qczwvSXRlbT4KICAgICAgICAgICAgICAgICAgICAgICAgPEl0ZW0+Q29yZS5BZ2VudC5BZG1pbi5EeW5hbWljRmllbGREcm9wZG93bi5qczwvSXRlbT4KICAgICAgICAgICAgICAgICAgICAgICAgPEl0ZW0+Q29yZS5BZ2VudC5BZG1pbi5TeXNDb25maWcuRW50aXR5LmpzPC9JdGVtPgogICAgICAgICAgICAgICAgICAgIDwvQXJyYXk+CiAgICAgICAgICAgICAgICA8L0l0ZW0+CiAgICAgICAgICAgIDwvSGFzaD4KICAgICAgICA8L1ZhbHVlPgogICAgPC9TZXR0aW5nPgoJPFNldHRpbmcgTmFtZT0iRHluYW1pY0ZpZWxkczo6RHJpdmVyIyMjUm9sZUFnZW50IiBSZXF1aXJlZD0iMCIgVmFsaWQ9IjEiPgogICAgICAgIDxEZXNjcmlwdGlvbiBUcmFuc2xhdGFibGU9IjEiPkR5bmFtaWNGaWVsZCBiYWNrZW5kIHJlZ2lzdHJhdGlvbi48L0Rlc2NyaXB0aW9uPgogICAgICAgIDxOYXZpZ2F0aW9uPkNvcmU6OkR5bmFtaWNGaWVsZHM6OkRyaXZlclJlZ2lzdHJhdGlvbjwvTmF2aWdhdGlvbj4KICAgICAgICA8VmFsdWU+CiAgICAgICAgICAgIDxIYXNoPgogICAgICAgICAgICAgICAgPEl0ZW0gS2V5PSJEaXNwbGF5TmFtZSIgVHJhbnNsYXRhYmxlPSIxIj5Sb2xlQWdlbnQ8L0l0ZW0+CiAgICAgICAgICAgICAgICA8SXRlbSBLZXk9Ik1vZHVsZSI+S2VybmVsOjpTeXN0ZW06OkR5bmFtaWNGaWVsZDo6RHJpdmVyOjpSb2xlQWdlbnQ8L0l0ZW0+CiAgICAgICAgICAgICAgICA8SXRlbSBLZXk9IkNvbmZpZ0RpYWxvZyI+QWRtaW5EeW5hbWljRmllbGRSb2xlQWdlbnQ8L0l0ZW0+CiAgICAgICAgICAgIDwvSGFzaD4KICAgICAgICA8L1ZhbHVlPgogICAgPC9TZXR0aW5nPgo8L290cnNfY29uZmlnPgo=</File>
