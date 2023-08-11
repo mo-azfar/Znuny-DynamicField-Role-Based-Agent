@@ -1,7 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
-# Copyright (C) 2023 mo-azfar, https://github.com/mo-azfar/Znuny-DynamicField-Roled-Based-Agent
+# Copyright (C) 2023 mo-azfar, https://github.com/mo-azfar/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -169,7 +169,7 @@ sub _AddAction {
 
     for my $ConfigParam (
         qw(
-        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent
+        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent Cache
         )
         )
     {
@@ -205,6 +205,7 @@ sub _AddAction {
     # set specific config
     my $FieldConfig = {
         RoleAgent       => $GetParam{RoleAgent},
+		Cache       	=> $GetParam{Cache},
     };
 
     # create a new field
@@ -281,6 +282,7 @@ sub _Change {
 
         # set RoleAgent
         $Config{RoleAgent} = $DynamicFieldData->{Config}->{RoleAgent};
+		$Config{Cache} = $DynamicFieldData->{Config}->{Cache};
     }
 
     return $Self->_ShowScreen(
@@ -402,7 +404,7 @@ sub _ChangeAction {
 
     for my $ConfigParam (
         qw(
-        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent
+        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent Cache
         )
         )
     {
@@ -464,6 +466,7 @@ sub _ChangeAction {
     # set specific config
     my $FieldConfig = {
         RoleAgent    => $GetParam{RoleAgent},
+		Cache    => $GetParam{Cache},
     };
 
     # update dynamic field (FieldType and ObjectType cannot be changed; use old values)
@@ -637,6 +640,8 @@ sub _ShowScreen {
         Class      => 'Modernize W50pc',
     );
 
+	my $CacheStrg = $Param{Cache} || '0';
+	
     my $ReadonlyInternalField = '';
 
     # Internal fields can not be deleted and name should not change.
@@ -702,6 +707,7 @@ sub _ShowScreen {
             DynamicFieldOrderStrg  => $DynamicFieldOrderStrg,
             ValueCounter           => $ValueCounter,
             RoleAgentStrg          => $RoleAgentStrg,
+			CacheStrg			   => $CacheStrg,
             ReadonlyInternalField  => $ReadonlyInternalField,
         }
     );

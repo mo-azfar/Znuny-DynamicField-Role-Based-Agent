@@ -279,18 +279,32 @@ sub ColumnFilterValuesGet {
 sub PossibleValuesGet {
     my ( $Self, %Param ) = @_;
 	
-	my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+	my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 	my $Config = $Param{DynamicFieldConfig}->{Config} || {};
+	my $CacheKey = $Param{DynamicFieldConfig}->{Name};
+	
+	if ( $Config->{Cache} )
+	{
+		my $CacheValue = $CacheObject->Get(
+			Type => 'DynamicFieldValues',
+			Key  => $CacheKey,
+		);
+
+		return $CacheValue if $CacheValue;
+	}
+	
+	my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
 	my $RoleID = $Config->{RoleAgent};
 	
-	my %UserList = $GroupObject->PermissionRoleUserGet(
+	my %UserList = ('' => '-');
+	my %AgentList = $GroupObject->PermissionRoleUserGet(
         RoleID => $Config->{RoleAgent},
     );
 	
-	if (%UserList)
+	if (%AgentList)
 	{
 		my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-		foreach my $UserID (keys %UserList)
+		foreach my $UserID (keys %AgentList)
 		{
 			my %User = $UserObject->GetUserData(
 				UserID	=>	$UserID,
@@ -307,8 +321,16 @@ sub PossibleValuesGet {
 		}
 	}
 	
-	#Add empty list selection
-	$UserList{''} = '-';
+	if ( $Config->{Cache} )
+	{
+		$CacheObject->Set(
+			Type  => 'DynamicFieldValues',
+			Key   => $CacheKey,
+			Value => \%UserList,
+			TTL   => 60 * 60 * 24 * 1,
+		);
+	}
+	
     return \%UserList;
 }
 
