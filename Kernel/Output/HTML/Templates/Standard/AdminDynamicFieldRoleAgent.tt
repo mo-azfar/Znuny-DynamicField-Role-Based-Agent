@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2024 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2021 maxence business consulting GmbH, http://www.maxence.de
 # Copyright (C) 2023 mo-azfar, https://github.com/mo-azfar/
@@ -174,18 +174,27 @@
                 <div class="Content">
                     <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
                     <fieldset class="TableLike">
-                     
-						<div class="field-wrapper">
+
+                        <div class="field-wrapper">
                             <label class="Mandatory" for="RoleAgent"><span class="Marker">*</span> [% Translate("Role") | html %]</label>
                             <div class="Field">
                                 [% Data.RoleAgentStrg %]
                             </div>
+                            <div id="RoleAgentError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="RoleAgentServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                         </div>
-						
-						<div class="field-wrapper">
+
+                        <div class="field-wrapper">
+                            <label class="" for="OwnerResponsible">[% Translate("Set Selected User as") | html %]</label>
+                            <div class="Field">
+                                [% Data.OwnerResponsibleStrg %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
                             <label for="Cache">[% Translate("Daily Cache") | html %]</label>
                             <div class="Field">
-								<input type="checkbox" name="Cache" id="Cache" value="1" [% IF Data.CacheStrg %]checked="checked"[% END %]>
+                                <input type="checkbox" name="Cache" id="Cache" value="1" [% IF Data.CacheStrg %]checked="checked"[% END %]>
                             </div>
                         </div>
 

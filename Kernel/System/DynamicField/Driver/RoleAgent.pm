@@ -1,7 +1,7 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2024 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
-# Copyright (C) 2023 mo-azfar, https://github.com/mo-azfar/Znuny-DynamicField-Role-Based-Agent
+# Copyright (C) 2023 mo-azfar, https://github.com/mo-azfar/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,7 +25,7 @@ our @ObjectDependencies = (
 
 =head1 NAME
 
-Kernel::System::DynamicField::Driver::Dropdown
+Kernel::System::DynamicField::Driver::RoleAgent
 
 =head1 DESCRIPTION
 
@@ -105,7 +105,7 @@ sub ValueGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::ValueGet(%Param);
 }
 
 sub ValueSet {
@@ -113,7 +113,7 @@ sub ValueSet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::ValueSet(%Param);
 }
 
 sub ValueValidate {
@@ -121,7 +121,15 @@ sub ValueValidate {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::ValueValidate(%Param);
+}
+
+sub FieldValueValidate {
+    my ( $Self, %Param ) = @_;
+
+    $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
+
+    return $Self->SUPER::FieldValueValidate(%Param);
 }
 
 sub SearchSQLGet {
@@ -129,7 +137,7 @@ sub SearchSQLGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::SearchSQLGet(%Param);
 }
 
 sub SearchSQLOrderFieldGet {
@@ -137,7 +145,7 @@ sub SearchSQLOrderFieldGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::SearchSQLOrderFieldGet(%Param);
 }
 
 sub EditFieldRender {
@@ -145,7 +153,7 @@ sub EditFieldRender {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::EditFieldRender(%Param);
 }
 
 sub EditFieldValueGet {
@@ -153,7 +161,7 @@ sub EditFieldValueGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::EditFieldValueGet(%Param);
 }
 
 sub EditFieldValueValidate {
@@ -161,7 +169,7 @@ sub EditFieldValueValidate {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::EditFieldValueValidate(%Param);
 }
 
 sub DisplayValueRender {
@@ -169,7 +177,7 @@ sub DisplayValueRender {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::DisplayValueRender(%Param);
 }
 
 sub SearchFieldRender {
@@ -177,7 +185,7 @@ sub SearchFieldRender {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::SearchFieldRender(%Param);
 }
 
 sub SearchFieldValueGet {
@@ -185,7 +193,7 @@ sub SearchFieldValueGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::SearchFieldValueGet(%Param);
 }
 
 sub SearchFieldParameterBuild {
@@ -193,7 +201,7 @@ sub SearchFieldParameterBuild {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::SearchFieldParameterBuild(%Param);
 }
 
 sub StatsFieldParameterBuild {
@@ -201,7 +209,7 @@ sub StatsFieldParameterBuild {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::StatsFieldParameterBuild(%Param);
 }
 
 sub StatsSearchFieldParameterBuild {
@@ -209,7 +217,7 @@ sub StatsSearchFieldParameterBuild {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::StatsSearchFieldParameterBuild(%Param);
 }
 
 sub ReadableValueRender {
@@ -217,7 +225,7 @@ sub ReadableValueRender {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::ReadableValueRender(%Param);
 }
 
 sub TemplateValueTypeGet {
@@ -225,15 +233,7 @@ sub TemplateValueTypeGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
-}
-
-sub RandomValueSet {
-    my ( $Self, %Param ) = @_;
-
-    $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
-
-    return $Self->next::method(%Param);
+    return $Self->SUPER::TemplateValueTypeGet(%Param);
 }
 
 sub ObjectMatch {
@@ -241,7 +241,7 @@ sub ObjectMatch {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::ObjectMatch(%Param);
 }
 
 sub HistoricalValuesGet {
@@ -249,7 +249,7 @@ sub HistoricalValuesGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::HistoricalValuesGet(%Param);
 }
 
 sub ValueLookup {
@@ -257,7 +257,7 @@ sub ValueLookup {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::ValueLookup(%Param);
 }
 
 sub BuildSelectionDataGet {
@@ -265,7 +265,7 @@ sub BuildSelectionDataGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::BuildSelectionDataGet(%Param);
 }
 
 sub ColumnFilterValuesGet {
@@ -273,75 +273,67 @@ sub ColumnFilterValuesGet {
 
     $Param{DynamicFieldConfig}->{Config}->{PossibleValues} = $Self->PossibleValuesGet(%Param);
 
-    return $Self->next::method(%Param);
+    return $Self->SUPER::ColumnFilterValuesGet(%Param);
 }
 
 sub PossibleValuesGet {
     my ( $Self, %Param ) = @_;
-	
-	my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
-	my $Config = $Param{DynamicFieldConfig}->{Config} || {};
-	my $CacheKey = $Param{DynamicFieldConfig}->{Name};
-	
-	if ( $Config->{Cache} )
-	{
-		my $CacheValue = $CacheObject->Get(
-			Type => 'DynamicFieldValues',
-			Key  => $CacheKey,
-		);
 
-		return $CacheValue if $CacheValue;
-	}
-	
-	my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-	my $RoleID = $Config->{RoleAgent};
-	
-	my %UserList = ('' => '-');
-	my %AgentList = $GroupObject->PermissionRoleUserGet(
-        RoleID => $Config->{RoleAgent},
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $Config      = $Param{DynamicFieldConfig}->{Config} || {};
+    my $RoleKey     = $Config->{RoleAgent};
+    my $CacheKey    = $Param{DynamicFieldConfig}->{Name} . '::' . $RoleKey;
+
+    if ( $Config->{Cache} ) {
+        my $CacheValue = $CacheObject->Get(
+            Type => 'DynamicFieldValues',
+            Key  => $CacheKey,
+        );
+
+        return $CacheValue if $CacheValue;
+    }
+
+    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+
+    my %UserList  = ( '' => '-' );
+    my %AgentList = $GroupObject->PermissionRoleUserGet(
+        RoleID => $RoleKey,
     );
-	
-	if (%AgentList)
-	{
-		my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-		foreach my $UserID (keys %AgentList)
-		{
-			my %User = $UserObject->GetUserData(
-				UserID	=>	$UserID,
-				Valid	=>	1,
-				NoOutOfOffice => 0,
-			);
-			
-			if ($User{OutOfOfficeMessage})
-			{
-				$UserList{$UserID} = $User{UserFullname}.' '.$User{OutOfOfficeMessage};
-			}	
 
-			$UserList{$UserID} = $User{UserFullname};
-		}
-	}
-	
-	if ( $Config->{Cache} )
-	{
-		$CacheObject->Set(
-			Type  => 'DynamicFieldValues',
-			Key   => $CacheKey,
-			Value => \%UserList,
-			TTL   => 60 * 60 * 24 * 1,
-		);
-	}
-	
+    if (%AgentList) {
+        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
+        USERID:
+        for my $UserID ( sort keys %AgentList ) {
+
+            #exclude user root
+            next USERID if $UserID eq 1;
+
+            my %User = $UserObject->GetUserData(
+                UserID        => $UserID,
+                Valid         => 1,
+                NoOutOfOffice => 0,
+            );
+
+            if ( $User{OutOfOfficeMessage} ) {
+                $UserList{$UserID} = $User{UserFullname} . ' ' . $User{OutOfOfficeMessage};
+            }
+
+            $UserList{$UserID} = $User{UserFullname};
+
+        }
+    }
+
+    if ( $Config->{Cache} ) {
+        $CacheObject->Set(
+            Type  => 'DynamicFieldValues',
+            Key   => $CacheKey,
+            Value => \%UserList,
+            TTL   => 60 * 60 * 24 * 1,
+        );
+    }
+
     return \%UserList;
 }
 
 1;
-
-=head1 TERMS AND CONDITIONS
-
-This software is part of the OTRS project (L<https://otrs.org/>).
-
-This software comes with ABSOLUTELY NO WARRANTY. For details, see
-the enclosed file COPYING for license information (GPL). If you
-did not receive this file, see L<https://www.gnu.org/licenses/gpl-3.0.txt>.
-
-=cut

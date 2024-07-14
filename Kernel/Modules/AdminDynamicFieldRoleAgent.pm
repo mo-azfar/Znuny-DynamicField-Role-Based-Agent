@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2001-2024 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2023 mo-azfar, https://github.com/mo-azfar/
 # --
@@ -169,7 +169,7 @@ sub _AddAction {
 
     for my $ConfigParam (
         qw(
-        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent Cache
+        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent OwnerResponsible Cache
         )
         )
     {
@@ -184,12 +184,11 @@ sub _AddAction {
             Message => Translatable('Need ValidID'),
         );
     }
-	
-	# uncorrectable errors
-	if ( !$GetParam{RoleAgent} ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Need Role'),
-        );
+
+    # uncorrectable errors
+    if ( !$GetParam{RoleAgent} ) {
+        $Errors{RoleAgentServerError}        = 'ServerError';
+        $Errors{RoleAgentServerErrorMessage} = Translatable('RoleAgent must be selected.');
     }
 
     # return to add screen if errors
@@ -198,14 +197,15 @@ sub _AddAction {
             %Param,
             %Errors,
             %GetParam,
-            Mode           => 'Add',
+            Mode => 'Add',
         );
     }
 
     # set specific config
     my $FieldConfig = {
         RoleAgent       => $GetParam{RoleAgent},
-		Cache       	=> $GetParam{Cache},
+        OwnerResponsible => $GetParam{OwnerResponsible},
+        Cache           => $GetParam{Cache},
     };
 
     # create a new field
@@ -279,10 +279,7 @@ sub _Change {
 
     # extract configuration
     if ( IsHashRefWithData( $DynamicFieldData->{Config} ) ) {
-
-        # set RoleAgent
-        $Config{RoleAgent} = $DynamicFieldData->{Config}->{RoleAgent};
-		$Config{Cache} = $DynamicFieldData->{Config}->{Cache};
+        %Config = %{ $DynamicFieldData->{Config} };
     }
 
     return $Self->_ShowScreen(
@@ -323,13 +320,6 @@ sub _ChangeAction {
         );
     }
 
-	my $RoleID = $ParamObject->GetParam( Param => 'RoleAgent' );
-    if ( !$RoleID ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Need Role'),
-        );
-    }
-	
     my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 
     # get dynamic field data
@@ -404,7 +394,7 @@ sub _ChangeAction {
 
     for my $ConfigParam (
         qw(
-        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent Cache
+        ObjectType ObjectTypeName FieldType FieldTypeName ValidID RoleAgent OwnerResponsible Cache
         )
         )
     {
@@ -417,11 +407,10 @@ sub _ChangeAction {
             Message => Translatable('Need ValidID'),
         );
     }
-	
-	if ( !$GetParam{RoleAgent} ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Need Role'),
-        );
+
+    if ( !$GetParam{RoleAgent} ) {
+        $Errors{RoleAgentServerError}        = 'ServerError';
+        $Errors{RoleAgentServerErrorMessage} = Translatable('RoleAgent must be selected.');
     }
 
     # Check if dynamic field is present in SysConfig setting
@@ -458,15 +447,16 @@ sub _ChangeAction {
             %Param,
             %Errors,
             %GetParam,
-            ID             => $FieldID,
-            Mode           => 'Change',
+            ID   => $FieldID,
+            Mode => 'Change',
         );
     }
 
     # set specific config
     my $FieldConfig = {
-        RoleAgent    => $GetParam{RoleAgent},
-		Cache    => $GetParam{Cache},
+        RoleAgent       => $GetParam{RoleAgent},
+        OwnerResponsible => $GetParam{OwnerResponsible},
+        Cache           => $GetParam{Cache},
     };
 
     # update dynamic field (FieldType and ObjectType cannot be changed; use old values)
@@ -598,7 +588,7 @@ sub _ShowScreen {
         }
     }
 
-	# create the field order select
+    # create the field order select
     my $DynamicFieldOrderStrg = $LayoutObject->BuildSelection(
         Data          => \%OrderNamesList,
         Name          => 'FieldOrder',
@@ -626,22 +616,41 @@ sub _ShowScreen {
 
     my $RoleAgent = $Param{RoleAgent} || '0';
 
-	my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
-	my %RolesList = $GroupObject->RoleList(
+    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+    my %RolesList   = $GroupObject->RoleList(
         Valid => 1,
     );
-	
-	# create roles option list
+
+    # create roles option list
     my $RoleAgentStrg = $LayoutObject->BuildSelection(
-        Data 	   => \%RolesList, 
-        Name       => 'RoleAgent',
-        SelectedID => $RoleAgent,
-		PossibleNone => 1,
-        Class      => 'Modernize W50pc',
+        Data         => \%RolesList,
+        Name         => 'RoleAgent',
+        SelectedID   => $RoleAgent,
+        PossibleNone => 1,
+        Class        => 'Modernize Validate_Required ' . ( $Param{RoleAgentServerError} || ' ' ),
     );
 
-	my $CacheStrg = $Param{Cache} || '0';
-	
+    my $OwnerResponsible = $Param{OwnerResponsible} || '0';
+
+    my %OwnerResponsibleList = (
+        'TicketOwnerSet' => 'Ticket Owner',
+    );
+
+    if ( $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Responsible') ) {
+        $OwnerResponsibleList{'TicketResponsibleSet'} = 'Ticket Responsible';
+    }
+
+    #create ticketownerset and ticketresponsible set option list
+    my $OwnerResponsibleStrg = $LayoutObject->BuildSelection(
+        Data         => \%OwnerResponsibleList,
+        Name         => 'OwnerResponsible',
+        SelectedID   => $OwnerResponsible,
+        PossibleNone => 1,
+        Class        => 'Modernize',
+    );
+
+    my $CacheStrg = $Param{Cache} || '0';
+
     my $ReadonlyInternalField = '';
 
     # Internal fields can not be deleted and name should not change.
@@ -703,12 +712,13 @@ sub _ShowScreen {
         TemplateFile => 'AdminDynamicFieldRoleAgent',
         Data         => {
             %Param,
-            ValidityStrg           => $ValidityStrg,
-            DynamicFieldOrderStrg  => $DynamicFieldOrderStrg,
-            ValueCounter           => $ValueCounter,
-            RoleAgentStrg          => $RoleAgentStrg,
-			CacheStrg			   => $CacheStrg,
-            ReadonlyInternalField  => $ReadonlyInternalField,
+            ValidityStrg          => $ValidityStrg,
+            DynamicFieldOrderStrg => $DynamicFieldOrderStrg,
+            ValueCounter          => $ValueCounter,
+            RoleAgentStrg         => $RoleAgentStrg,
+            OwnerResponsibleStrg  => $OwnerResponsibleStrg,
+            CacheStrg             => $CacheStrg,
+            ReadonlyInternalField => $ReadonlyInternalField,
         }
     );
 

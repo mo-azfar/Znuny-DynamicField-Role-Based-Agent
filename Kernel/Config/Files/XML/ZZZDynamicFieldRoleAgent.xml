@@ -53,4 +53,15 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Ticket::EventModulePost###999-DynamicFieldRoleAgentOwnerResponsibleSet" Required="0" Valid="1">
+        <Description Translatable="1">Ticket event module that set owner or resposible based on the selected dynamic field role agent value.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::DynamicFieldRoleAgentOwnerResponsibleSet</Item>
+                <Item Key="Transaction">0</Item>
+                <Item Key="Event">TicketDynamicFieldUpdate</Item>
+            </Hash>
+        </Value>
+    </Setting>
 </otrs_config>

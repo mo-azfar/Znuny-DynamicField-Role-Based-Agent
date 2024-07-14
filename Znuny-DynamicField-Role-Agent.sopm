@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_package version="1.0">
+    <Name>Znuny-DynamicField-Role-Agent</Name>
+    <Version>7.0.4</Version>
+    <Framework>7.0.x</Framework>
+    <Vendor>mo-azfar</Vendor>
+    <URL>https://github.com/mo-azfar/Znuny-DynamicField-Role-Based-Agent/</URL>
+    <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+    <Description Lang="en">Populate list of agent in dynamic field based on selected role (dropdown).</Description>
+    <ChangeLog Version="7.0.1" Date="2023-05-18 00:00:01" >New package.</ChangeLog>
+    <ChangeLog Version="7.0.2" Date="2023-05-25 00:00:01" >Add Out Of Office remark.</ChangeLog>
+    <ChangeLog Version="7.0.3" Date="2023-08-11 00:00:01">Add daily caching option.</ChangeLog>
+    <ChangeLog Version="7.0.4" Date="2024-07-14 00:00:01">Improved cache handling by each role. Add option to set selected user as ticket owner or ticket responsible. Code tidied.</ChangeLog>
+    <Filelist>
+        <File Permission="660" Location="Kernel/Config/Files/XML/ZZZDynamicFieldRoleAgent.xml"/>
+        <File Permission="660" Location="Kernel/Modules/AdminDynamicFieldRoleAgent.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldRoleAgent.tt"/>
+        <File Permission="660" Location="Kernel/System/DynamicField/Driver/RoleAgent.pm"/>
+        <File Permission="660" Location="Kernel/System/Ticket/Event/DynamicFieldRoleAgentOwnerResponsibleSet.pm"/>
+    </Filelist>
+    <IntroInstall Lang="en" Title="Install Information" Type="pre"><![CDATA[
+        <br/>
+        <b>WELCOME</b>
+        <br/>
+        <br/>
+        You are about to install the package Znuny-DynamicField-Role-Agent. Check <a href='https://github.com/mo-azfar/Znuny-DynamicField-Role-Based-Agent/' target='_blank'/>README</a><br/>
+        <br/><br/>
+        ((enjoy))<br/>
+        <br/>
+    ]]></IntroInstall>
+    <IntroUpgrade Lang="en" Title="Upgrade Information" Type="pre"><![CDATA[
+        <br/>
+        Changelog<br/>
+        7.0.1 - New package.<br/>
+        7.0.2 - Add Out Of Office remark.<br/>
+        7.0.3 - Add daily caching option.<br/>
+        7.0.4 - Improved cache handling by each role. Add option to set selected user as ticket owner or ticket responsible. Code tidied.<br/>
+        <br/><br/>
+        ((enjoy))<br/>
+        <br/>
+    ]]></IntroUpgrade>
+</otrs_package>
